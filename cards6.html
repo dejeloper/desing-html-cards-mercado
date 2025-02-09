@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Productos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-gray-100 p-6">
+    <div class="max-w-lg mx-auto">
+      <!-- Tarjeta Arroz -->
+      <div class="bg-gray-800 p-5 rounded-xl shadow-md flex flex-col">
+        <img
+          src="https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6"
+          alt="Arroz"
+          class="w-full h-40 object-cover rounded-lg mb-4"
+        />
+        <div class="flex justify-between items-center">
+          <h2 class="text-lg font-semibold">Arroz</h2>
+          <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded"
+            >Supermercado</span
+          >
+        </div>
+        <p class="text-gray-400 text-sm mt-1">Grano de calidad premium.</p>
+        <p class="text-green-400 font-bold mt-2">
+          $12.00 <span class="text-sm text-red-500">↓ Bajó de precio</span>
+        </p>
+        <div class="flex gap-2 mt-2">
+          <span class="bg-green-500 text-white text-xs px-2 py-1 rounded"
+            >Alimentos</span
+          >
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Último refill: 2024-01-10</p>
+        <p class="text-red-500 text-xs mt-1">⚠️ Pendiente por comprar</p>
+
+        <div class="flex justify-between items-center mt-4">
+          <div class="flex -space-x-2">
+            <img
+              src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              class="w-9 h-9 rounded-full border-2 border-gray-800 hover:z-10"
+              title="Usuario 1"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+              class="w-9 h-9 rounded-full border-2 border-gray-800 hover:z-10"
+              title="Usuario 2"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              class="w-9 h-9 rounded-full border-2 border-gray-800 hover:z-10"
+              title="Usuario 3"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              class="w-9 h-9 rounded-full border-2 border-gray-800 hover:z-10"
+              title="Usuario 4"
+            />
+            <div
+              class="w-9 h-9 bg-gray-700 text-gray-300 text-xs flex items-center justify-center rounded-full border-2 border-gray-800"
+            >
+              +2
+            </div>
+          </div>
+
+          <div class="flex gap-3">
+            <button class="text-blue-400 text-sm font-semibold">
+              ✏️ Editar
+            </button>
+            <button class="text-yellow-400 text-sm font-semibold">
+              🔄 Actualizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

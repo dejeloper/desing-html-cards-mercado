@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Productos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-gray-100 p-6">
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <!-- Tarjeta Arroz -->
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md">
+        <img
+          src="https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6"
+          alt="Arroz"
+          class="w-full h-32 object-cover rounded-lg mb-3"
+        />
+        <h2 class="text-lg font-semibold">Arroz</h2>
+        <p class="text-gray-400 text-sm">Grano de calidad premium.</p>
+        <p class="text-green-400 font-bold mt-2">
+          $12.00 <span class="text-sm text-red-500">↓ Bajó de precio</span>
+        </p>
+        <div class="flex gap-2 mt-2">
+          <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded"
+            >Supermercado</span
+          >
+          <span class="bg-green-500 text-white text-xs px-2 py-1 rounded"
+            >Alimentos</span
+          >
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Último refill: 2024-01-10</p>
+        <p class="text-red-500 text-xs mt-1">Pendiente por comprar</p>
+        <div class="flex items-center gap-2 mt-3">
+          <img
+            src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <button class="text-blue-400 text-sm">✏️ Editar</button>
+          <button class="text-yellow-400 text-sm">🔄 Actualizar</button>
+        </div>
+      </div>
+
+      <!-- Tarjeta Leche -->
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md">
+        <img
+          src="https://images.unsplash.com/photo-1608634960479-c70cf0c3dece?q=80&w=1974"
+          alt="Leche"
+          class="w-full h-32 object-cover rounded-lg mb-3"
+        />
+        <h2 class="text-lg font-semibold">Leche</h2>
+        <p class="text-gray-400 text-sm">Leche entera en envase de 1L.</p>
+        <p class="text-red-400 font-bold mt-2">
+          $3.50 <span class="text-sm text-green-500">↑ Subió de precio</span>
+        </p>
+        <div class="flex gap-2 mt-2">
+          <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded"
+            >Tienda local</span
+          >
+          <span class="bg-yellow-500 text-white text-xs px-2 py-1 rounded"
+            >Lácteos</span
+          >
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Último refill: 2024-02-01</p>
+        <p class="text-orange-500 text-xs mt-1">Requiere compra este mes</p>
+        <div class="flex items-center gap-2 mt-3">
+          <img
+            src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <button class="text-blue-400 text-sm">✏️ Editar</button>
+          <button class="text-yellow-400 text-sm">🔄 Actualizar</button>
+        </div>
+      </div>
+
+      <!-- Tarjeta Huevos -->
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md">
+        <img
+          src="https://images.unsplash.com/photo-1498654077810-12c21d4d6dc3?q=80&w=2070"
+          alt="Huevos"
+          class="w-full h-32 object-cover rounded-lg mb-3"
+        />
+        <h2 class="text-lg font-semibold">Huevos</h2>
+        <p class="text-gray-400 text-sm">Docena de huevos frescos.</p>
+        <p class="text-green-400 font-bold mt-2">
+          $2.80 <span class="text-sm text-red-500">↓ Bajó de precio</span>
+        </p>
+        <div class="flex gap-2 mt-2">
+          <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded"
+            >Mercado</span
+          >
+          <span class="bg-red-500 text-white text-xs px-2 py-1 rounded"
+            >Proteína</span
+          >
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Último refill: 2024-01-28</p>
+        <div class="flex items-center gap-2 mt-3">
+          <img
+            src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <button class="text-blue-400 text-sm">✏️ Editar</button>
+          <button class="text-yellow-400 text-sm">🔄 Actualizar</button>
+        </div>
+      </div>
+
+      <!-- Tarjeta Azúcar -->
+      <div class="bg-gray-800 p-4 rounded-xl shadow-md">
+        <img
+          src="https://images.unsplash.com/photo-1634612831148-03a8550e1d52?q=80&w=1932"
+          alt="Azúcar"
+          class="w-full h-32 object-cover rounded-lg mb-3"
+        />
+        <h2 class="text-lg font-semibold">Azúcar</h2>
+        <p class="text-gray-400 text-sm">Bolsa de 1kg de azúcar refinada.</p>
+        <p class="text-red-400 font-bold mt-2">
+          $1.80 <span class="text-sm text-green-500">↑ Subió de precio</span>
+        </p>
+        <div class="flex gap-2 mt-2">
+          <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded"
+            >Supermercado</span
+          >
+          <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded"
+            >Dulces</span
+          >
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Último refill: 2024-01-15</p>
+        <p class="text-orange-500 text-xs mt-1">Requiere compra este mes</p>
+        <div class="flex items-center gap-2 mt-3">
+          <img
+            src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            class="w-8 h-8 rounded-full"
+          />
+          <button class="text-blue-400 text-sm">✏️ Editar</button>
+          <button class="text-yellow-400 text-sm">🔄 Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
