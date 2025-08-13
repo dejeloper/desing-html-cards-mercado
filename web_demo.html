@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Productos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-neutral-900 dark:text-neutral-100">
+
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <div id="page-container"
+        class="mx-auto flex min-h-screen w-full min-w-[320px] flex-col bg-white dark:bg-blue-950/60 lg:pt-20">
+        <header id="page-header"
+            class="z-50 flex flex-none items-center border-b border-neutral-200/75 dark:border-blue-900/60 bg-white/90 dark:bg-blue-950/60 backdrop-blur-xs lg:fixed lg:start-0 lg:end-0 lg:top-0 lg:h-20">
+            <div class="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
+                <div class="flex justify-between py-5 lg:py-0">
+                    <div class="flex items-center gap-2 lg:gap-6">
+                        <a href="javascript:void(0)"
+                            class="group inline-flex items-center gap-1.5 text-lg font-bold tracking-wide text-neutral-900 hover:text-neutral-600 dark:text-blue-400 dark:hover:text-blue-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                                class="hi-mini hi-lifebuoy inline-block size-8 text-neutral-900 dark:text-blue-400 transition group-hover:scale-110 group-active:scale-100">
+                                <path fill="currentColor"
+                                    d="M35 34H13c-.3 0-.6-.2-.8-.4s-.2-.6-.1-.9l1.9-4.8L12.1 10H6V8h7c.5 0 .9.4 1 .9l2 19c0 .2 0 .3-.1.5L14.5 32H36z" />
+                                <path fill="currentColor"
+                                    d="m15.2 29l-.4-2L38 22.2V14H14v-2h25c.6 0 1 .4 1 1v10c0 .5-.3.9-.8 1zM36 40c-2.2 0-4-1.8-4-4s1.8-4 4-4s4 1.8 4 4s-1.8 4-4 4m0-6c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-24 6c-2.2 0-4-1.8-4-4s1.8-4 4-4s4 1.8 4 4s-1.8 4-4 4m0-6c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2" />
+                            </svg>
+                            <span>Merca<span class="font-normal dark:text-blue-200">dor</span></span>
+                        </a>
+
+                        <nav class="hidden items-center gap-2 lg:flex">
+                            <a href="javascript:void(0)"
+                                class="group flex items-center gap-2 rounded-lg bg-neutral-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-neutral-950 dark:text-blue-200 hover:bg-neutral-200 dark:hover:bg-blue-900/60 hover:text-blue-800 dark:hover:text-blue-400">
+                                <span>Inicio</span>
+                            </a>
+                            <a href="javascript:void(0)"
+                                class="group flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-800 dark:text-blue-200 hover:bg-neutral-100 dark:hover:bg-blue-900/40 hover:text-blue-800 dark:hover:text-blue-400 active:bg-neutral-50 dark:active:bg-blue-900/60">
+                                <span>Categorias</span>
+                            </a>
+                            <a href="javascript:void(0)"
+                                class="group flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-800 dark:text-blue-200 hover:bg-neutral-100 dark:hover:bg-blue-900/40 hover:text-blue-800 dark:hover:text-blue-400 active:bg-neutral-50 dark:active:bg-blue-900/60">
+                                <span>Lugares</span>
+                            </a>
+                            <a href="javascript:void(0)"
+                                class="group flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-800 dark:text-blue-200 hover:bg-neutral-100 dark:hover:bg-blue-900/40 hover:text-blue-800 dark:hover:text-blue-400 active:bg-neutral-50 dark:active:bg-blue-900/60">
+                                <span>Unidades</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <div class="relative inline-block">
+                            <button type="button" id="dropdown-notifications"
+                                class="inline-flex items-center justify-center gap-1 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm leading-5 font-semibold text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200 dark:bg-blue-900/60 dark:text-blue-300 shadow transition  dark:border-blue-800 hover:bg-neutral-300 dark:hover:bg-blue-900/40"
+                                onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');"
+                                aria-haspopup="true">
+                                <span class="dark:hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                            d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3zm3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31" />
+                                    </svg>
+                                </span>
+                                <span class="hidden dark:inline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 18a6 6 0 1 0 0-12a6 6 0 0 0 0 12m10-6h1M12 2V1m0 22v-1m8-2l-1-1m1-15l-1 1M4 20l1-1M4 4l1 1m-4 7h1" />
+                                    </svg>
+                                </span>
+                            </button>
+                            </button>
+                        </div>
+                        <!-- <div class="relative inline-block">
+              <button x-on:click="notificationsDropdownOpen = !notificationsDropdownOpen"
+                x-bind:aria-expanded="notificationsDropdownOpen" type="button" id="dropdown-notifications"
+                class="inline-flex items-center justify-center gap-1 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm leading-5 font-semibold text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200"
+                aria-haspopup="true">
+                <div class="absolute -end-2 -top-2">
+                  <span class="rounded-full bg-neutral-800 px-1.5 py-0.5 text-xs font-semibold text-white">3</span>
+                </div>
+                <svg class="hi-outline hi-bell-alert inline-block size-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+                </svg>
+              </button>
+            </div> -->
+
+                        <!-- <div class="relative inline-block">
+              <button x-on:click="userDropdownOpen = !userDropdownOpen" x-bind:aria-expanded="userDropdownOpen"
+                type="button" id="dropdown-user"
+                class="inline-flex items-center justify-center gap-1 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm leading-5 font-semibold text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200"
+                aria-haspopup="true">
+                <svg class="hi-mini hi-user-circle inline-block size-5 sm:hidden" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-5.5-2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM10 12a5.99 5.99 0 00-4.793 2.39A6.483 6.483 0 0010 16.5a6.483 6.483 0 004.793-2.11A5.99 5.99 0 0010 12z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span class="hidden sm:inline">John</span>
+                <svg class="hi-mini hi-chevron-down hidden size-5 opacity-40 sm:inline-block"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div> -->
+
+                        <!-- <div class="lg:hidden">
+              <button x-on:click="mobileNavOpen = !mobileNavOpen" type="button"
+                class="inline-flex items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm leading-5 font-semibold text-neutral-800 hover:border-neutral-300 hover:text-neutral-950 active:border-neutral-200">
+                <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                  class="hi-solid hi-menu inline-block size-5">
+                  <path fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </button>
+            </div> -->
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main id="page-content" class="flex max-w-full flex-auto flex-col">
+            <div class="container mx-auto px-4 pt-6 lg:px-8 lg:pt-8 xl:max-w-7xl">
+                <div
+                    class="flex flex-col gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start">
+                    <div class="grow">
+                        <h1 class="mb-1 text-xl font-bold">Inicio</h1>
+                        <h2 class="text-sm font-medium text-neutral-600 dark:text-blue-300">
+                            Hola, actualmente tiene
+                            <strong>40 productos registrados</strong> en
+                            <strong>5 lugares diferentes</strong> y el último mes
+                            <strong>32 compras confirmadas</strong>.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto p-4 lg:p-8 xl:max-w-7xl">
+                <div
+                    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 border-b border-b-neutral-200 pb-8 mb-4">
+                    <a href="javascript:void(0)"
+                        class="flex flex-col rounded-lg border border-neutral-200 bg-white hover:border-neutral-300 active:border-neutral-200 dark:bg-blue-950/60 dark:border-blue-900/60 dark:hover:border-blue-800">
+                        <div class="flex grow items-center justify-between p-5">
+                            <dl>
+                                <dt class="text-2xl font-bold dark:text-blue-200">40</dt>
+                                <dd class="text-sm font-medium text-neutral-500 dark:text-blue-300">
+                                    Productos
+                                </dd>
+                            </dl>
+                            <div class="flex items-center text-sm font-medium text-emerald-500">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="hi-mini hi-arrow-down inline-block size-5" viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M19 6h-2c0-2.8-2.2-5-5-5S7 3.2 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-7-3c1.7 0 3 1.3 3 3H9c0-1.7 1.3-3 3-3m7 17H5V8h14zm-7-8c-1.7 0-3-1.3-3-3H7c0 2.8 2.2 5 5 5s5-2.2 5-5h-2c0 1.7-1.3 3-3 3" />
+                                </svg>
+                                <span>32</span>
+                            </div>
+                        </div>
+                        <div
+                            class="border-t border-neutral-100 px-5 py-3 text-xs font-medium text-orange-500 dark:border-blue-900/60 dark:text-blue-300">
+                            Revisa el listado
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)"
+                        class="flex flex-col rounded-lg border border-neutral-200 bg-white hover:border-neutral-300 active:border-neutral-200 dark:bg-blue-950/60 dark:border-blue-900/60 dark:hover:border-blue-800">
+                        <div class="flex grow items-center justify-between p-5">
+                            <dl>
+                                <dt class="text-2xl font-bold dark:text-blue-200">10</dt>
+                                <dd class="text-sm font-medium text-neutral-500 dark:text-blue-300">
+                                    Lugares
+                                </dd>
+                            </dl>
+                            <div class="flex items-center text-sm font-medium text-emerald-500">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="hi-mini hi-arrow-down inline-block size-5" viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 18H6v-4h6m9 0v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6m0-10H4v2h16z" />
+                                </svg>
+                                <span>4</span>
+                            </div>
+                        </div>
+                        <div
+                            class="border-t border-neutral-100 px-5 py-3 text-xs font-medium text-neutral-500 dark:border-blue-900/60 dark:text-blue-300">
+                            Explora los sitios
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)"
+                        class="flex flex-col rounded-lg border border-neutral-200 bg-white hover:border-neutral-300 active:border-neutral-200 dark:bg-blue-950/60 dark:border-blue-900/60 dark:hover:border-blue-800">
+                        <div class="flex grow items-center justify-between p-5">
+                            <dl>
+                                <dt class="text-2xl font-bold dark:text-blue-200">14</dt>
+                                <dd class="text-sm font-medium text-neutral-500 dark:text-blue-300">
+                                    Categorías
+                                </dd>
+                            </dl>
+                            <div class="flex items-center text-sm font-medium text-emerald-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    class="hi-mini hi-arrow-down inline-block size-5" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M5.5 9A1.5 1.5 0 0 0 7 7.5A1.5 1.5 0 0 0 5.5 6A1.5 1.5 0 0 0 4 7.5A1.5 1.5 0 0 0 5.5 9m11.91 2.58c.36.36.59.86.59 1.42c0 .55-.22 1.05-.59 1.41l-5 5a1.996 1.996 0 0 1-2.83 0l-6.99-6.99C2.22 12.05 2 11.55 2 11V6c0-1.11.89-2 2-2h5c.55 0 1.05.22 1.41.58zm-3.87-5.87l1-1l6.87 6.87c.37.36.59.87.59 1.42s-.22 1.05-.58 1.41l-5.38 5.38l-1-1L20.75 13z" />
+                                </svg>
+                                <span>12</span>
+                            </div>
+                        </div>
+                        <div
+                            class="border-t border-neutral-100 px-5 py-3 text-xs font-medium text-neutral-500 dark:border-blue-900/60 dark:text-blue-300">
+                            Vistazo a las categorías
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)"
+                        class="flex flex-col rounded-lg border border-neutral-200 bg-white hover:border-neutral-300 active:border-neutral-200 dark:bg-blue-950/60 dark:border-blue-900/60 dark:hover:border-blue-800">
+                        <div class="flex grow items-center justify-between p-5">
+                            <dl>
+                                <dt class="text-2xl font-bold dark:text-blue-200">950K</dt>
+                                <dd class="text-sm font-medium text-neutral-500 dark:text-blue-300">
+                                    Gasto del último mes
+                                </dd>
+                            </dl>
+                            <div class="flex items-center text-sm font-medium text-rose-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                    class="hi-mini hi-arrow-small-up inline-block size-5" aria-hidden="true">
+                                    <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+                                        <path
+                                            d="M28.772 24.667A4 4 0 0 0 25 22v-1h-2v1a4 4 0 1 0 0 8v4c-.87 0-1.611-.555-1.887-1.333a1 1 0 1 0-1.885.666A4 4 0 0 0 23 36v1h2v-1a4 4 0 0 0 0-8v-4a2 2 0 0 1 1.886 1.333a1 1 0 1 0 1.886-.666M23 24a2 2 0 1 0 0 4zm2 10a2 2 0 1 0 0-4z" />
+                                        <path
+                                            d="M13.153 8.621C15.607 7.42 19.633 6 24.039 6c4.314 0 8.234 1.361 10.675 2.546l.138.067c.736.364 1.33.708 1.748.987L32.906 15C41.422 23.706 48 41.997 24.039 41.997S6.479 24.038 15.069 15l-3.67-5.4c.283-.185.642-.4 1.07-.628q.318-.171.684-.35m17.379 6.307l2.957-4.323c-2.75.198-6.022.844-9.172 1.756c-2.25.65-4.75.551-7.065.124a25 25 0 0 1-1.737-.386l1.92 2.827c4.115 1.465 8.981 1.465 13.097.002M16.28 16.63c4.815 1.86 10.602 1.86 15.417-.002a29.3 29.3 0 0 1 4.988 7.143c1.352 2.758 2.088 5.515 1.968 7.891c-.116 2.293-1.018 4.252-3.078 5.708c-2.147 1.517-5.758 2.627-11.537 2.627c-5.785 0-9.413-1.091-11.58-2.591c-2.075-1.437-2.986-3.37-3.115-5.632c-.135-2.35.585-5.093 1.932-7.87c1.285-2.648 3.078-5.197 5.005-7.274m-1.15-6.714c.8.238 1.636.445 2.484.602c2.15.396 4.306.454 6.146-.079a54 54 0 0 1 6.53-1.471C28.45 8.414 26.298 8 24.038 8c-3.445 0-6.658.961-8.908 1.916" />
+                                    </g>
+                                </svg>
+                                <span>110%</span>
+                            </div>
+                        </div>
+                        <div
+                            class="border-t border-neutral-100 px-5 py-3 text-xs font-medium text-neutral-500 dark:border-blue-900/60 dark:text-blue-300">
+                            Veamos los gastos del mes
+                        </div>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 gap-4   lg:grid-cols-2 lg:gap-4">
+                    <div
+                        class="flex flex-col rounded-lg border border-neutral-200 bg-white   dark:bg-blue-950/60 dark:border-blue-900/60">
+                        <div
+                            class="flex flex-col items-center justify-between gap-4 border-b border-neutral-100 p-5 text-center sm:flex-row sm:text-start dark:border-blue-900/60">
+                            <div>
+                                <h2 class="mb-0.5 font-semibold dark:text-blue-200">
+                                    Top de Productos económicos
+                                </h2>
+                                <h3 class="text-sm font-medium text-neutral-600 dark:text-blue-300">
+                                    Estos son los productos más económicos
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="py-5 px-0 md:p-5">
+                            <div class="w-full overflow-x-auto rounded-sm">
+                                <table class="min-w-full align-middle text-sm dark:divide-blue-900/60">
+                                    <thead>
+                                        <tr class="border-b-2 border-neutral-100 dark:border-blue-900/60">
+                                            <th
+                                                class="min-w-[60px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase dark:text-blue-300">
+                                                Producto</th>
+                                            <th
+                                                class="min-w-[120px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase dark:text-blue-300">
+                                                Categoría</th>
+                                            <th
+                                                class="min-w-[100px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase dark:text-blue-300">
+                                                Lugar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Arroz Blanco</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-amber-500/80 text-xs px-2 py-1 rounded">
+                                                    <span class="">🌾</span>
+                                                    Granos</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span
+                                                    class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Supermercado</span>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Leche</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-blue-500/90 text-xs px-2 py-1 rounded">
+                                                    <span class="">🥛</span>
+                                                    Lácteos</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Tienda
+                                                    Local</span>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Huevos</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-red-500/70   text-xs px-2 py-1 rounded">
+                                                    <span class="">🥩</span>
+                                                    Proteína</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span
+                                                    class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Mercado</span>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Azúcar</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-purple-500/80  text-xs px-2 py-1 rounded">
+                                                    <span class="">🍬</span>
+                                                    Dulces</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span
+                                                    class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Supermercado</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex flex-col rounded-lg border border-neutral-200 bg-white dark:bg-blue-950/60 dark:border-blue-900/60">
+                        <div
+                            class="flex flex-col items-center justify-between gap-4 border-b border-neutral-100 p-5 text-center sm:flex-row sm:text-start dark:border-blue-900/60">
+                            <div>
+                                <h2 class="mb-0.5 font-semibold dark:text-blue-200">
+                                    Top de más comprados
+                                </h2>
+                                <h3 class="text-sm font-medium text-neutral-600 dark:text-blue-300">
+                                    Estos son los productos más comprados en el ultimo mes
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="py-5 px-0 md:p-5">
+                            <div class="min-w-full overflow-x-auto rounded-sm">
+                                <table class="min-w-full align-middle text-sm dark:divide-blue-900/60">
+                                    <thead>
+                                        <tr class="border-b-2 border-neutral-100 dark:border-blue-900/60">
+                                            <th
+                                                class="min-w-[60px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase dark:text-blue-300">
+                                                Producto</th>
+                                            <th
+                                                class="min-w-[120px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase dark:text-blue-300">
+                                                Categoría</th>
+                                            <th
+                                                class="min-w-[100px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase dark:text-blue-300">
+                                                Lugar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Pan Integral</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-yellow-500/80  text-xs px-2 py-1 rounded">
+                                                    <span class="">🍞</span>
+                                                    Panadería</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span
+                                                    class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Panadería</span>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Leche Descremada</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-blue-500/80 text-xs px-2 py-1 rounded">
+                                                    <span class="">🥛</span>
+                                                    Lácteos</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span
+                                                    class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Supermercado</span>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Pollo</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-red-500/70   text-xs px-2 py-1 rounded">
+                                                    <span class="">🥩</span>
+                                                    Proteína</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span
+                                                    class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Mercado</span>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="border-b border-neutral-100 hover:bg-neutral-50 dark:border-blue-900/60 dark:hover:bg-blue-900/40">
+                                            <td
+                                                class="p-3 text-start font-semibold text-neutral-600 dark:text-blue-200">
+                                                <span>Queso</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="border border-blue-500/90 text-xs px-2 py-1 rounded">
+                                                    <span class="">🥛</span>
+                                                    Lácteos</span>
+                                            </td>
+                                            <td class="p-3 text-start text-neutral-600 dark:text-blue-200">
+                                                <span class="bg-blue-500/80 text-white text-xs px-2 py-1 rounded">Tienda
+                                                    Local</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer id="page-footer" class="flex flex-none items-center py-5">
+            <div
+                class="container mx-auto flex flex-col px-4 text-center text-sm md:flex-row md:justify-between md:text-start lg:px-8 xl:max-w-7xl">
+                <div class="pt-4 pb-1 md:pb-4">
+                    <span class="font-medium">
+                        <a href="https://github.com/dejeloper/mercador-app"
+                            class="text-neutral-500 hover:text-neutral-950" target="_blank">Source code</a>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            class="hi-solid hi-heart mx-1 inline-block size-4">
+                            <path fill="currentColor"
+                                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="inline-flex items-center justify-center pt-1 pb-4 md:pt-4">
+                    <span>Desarrollado </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"
+                        class="hi-solid hi-heart mx-1 inline-block size-4  ">
+                        <path fill="#ea596e"
+                            d="M29.896 26.667c.003.283-.07.653-.146.958c-.531 2.145-2.889 4.552-6.208 4.333c-3.008-.198-5.458-1.642-5.458-3.667s2.444-3.667 5.458-3.667s6.335.018 6.354 2.043" />
+                        <path fill="#dd2e44"
+                            d="M23.542 24.964c-1.619 0-5.314.448-6.162.448c-1.498 0-2.713.94-2.713 2.1c0 .558.286 1.062.744 1.438c0 0 1.006 1.009 2.818.525c.793-.212 2.083-1.786 4.354-2.036c1.131-.125 3.25.75 6.974.771c.16-.344.193-.583.193-.583c0-2.027-3.194-2.663-6.208-2.663" />
+                        <path fill="#f4abba"
+                            d="M29.75 27.625s2.184-.443 3.542-2.229c1.583-2.083 1.375-4.312 1.375-4.312c1.604-3-.5-5.813-.5-5.813C33.958 12.104 32 10.792 32 10.792c-1.271-3.021-4.083-3.833-4.083-3.833c-2.208-2.583-6.125-2.5-6.125-2.5s-3.67-1.345-8.708.167c-.833.25-3.625.833-5.667 2.083C.981 10.649.494 16.793.584 17.792C1.083 23.375 5 24.375 7.5 24.958c.583 1.583 2.729 4.5 6.583 3.417c4.75-.833 6.75-2.25 7.917-2.25s4.417 1.25 7.75 1.5" />
+                        <g fill="#ea596e">
+                            <path
+                                d="M17.737 18.648c2.328-1.255 3.59-1.138 4.704-1.037c.354.032.689.057 1.028.055c1.984-.045 3.591-.881 4.302-1.69a.501.501 0 0 0-.752-.661c-.548.624-1.899 1.313-3.573 1.351c-.3.009-.601-.021-.913-.05c-1.195-.111-2.679-.247-5.271 1.152c-.665.359-1.577.492-2.565.592c-2.197-3.171-.875-5.933-.497-6.591c.037.002.073.014.111.014c.4 0 .802-.098 1.166-.304a.5.5 0 0 0-.492-.87a1.426 1.426 0 0 1-1.88-.467a.5.5 0 0 0-.841.539c.237.371.571.65.948.837c-.521 1.058-1.51 3.84.372 6.951c-1.324.13-2.65.317-3.688.986a7.2 7.2 0 0 0-1.878 1.791c-.629-.108-2.932-.675-3.334-3.231c.25-.194.452-.45.577-.766a.5.5 0 1 0-.93-.368a.77.77 0 0 1-.454.461a.78.78 0 0 1-.643-.07a.5.5 0 0 0-.486.874c.284.158.588.238.89.238c.037 0 .072-.017.109-.019c.476 2.413 2.383 3.473 3.732 3.794a3.7 3.7 0 0 0-.331 1.192a.5.5 0 0 0 .454.542l.045.002a.5.5 0 0 0 .498-.456c.108-1.213 1.265-2.48 2.293-3.145c.964-.621 2.375-.752 3.741-.879c1.325-.121 2.577-.237 3.558-.767m12.866-1.504a.5.5 0 0 0 .878.48c.019-.034 1.842-3.449-1.571-5.744a.5.5 0 0 0-.558.83c2.644 1.778 1.309 4.326 1.251 4.434M9.876 9.07a.5.5 0 0 0 .406-.208c1.45-2.017 3.458-1.327 3.543-1.295a.5.5 0 0 0 .345-.938c-.96-.356-3.177-.468-4.7 1.65a.5.5 0 0 0 .406.791m13.072-1.888c2.225-.181 3.237 1.432 3.283 1.508a.5.5 0 0 0 .863-.507c-.054-.091-1.34-2.218-4.224-1.998a.5.5 0 0 0 .078.997m9.15 14.611c-.246-.014-.517.181-.539.457c-.002.018-.161 1.719-1.91 2.294a.499.499 0 0 0 .157.975a.5.5 0 0 0 .156-.025c2.372-.778 2.586-3.064 2.594-3.161a.5.5 0 0 0-.458-.54" />
+                            <path
+                                d="M7.347 16.934a.5.5 0 1 0 .965.26a1.423 1.423 0 0 1 1.652-1.014a.5.5 0 0 0 .205-.979a2.35 2.35 0 0 0-1.248.086c-1.166-1.994-.939-3.96-.936-3.981a.5.5 0 0 0-.429-.562a.503.503 0 0 0-.562.427c-.013.097-.28 2.316 1.063 4.614a2.4 2.4 0 0 0-.71 1.149m11.179-2.47a1.07 1.07 0 0 1 1.455.015a.5.5 0 0 0 .707-.011a.5.5 0 0 0-.01-.707a2 2 0 0 0-.797-.465c.296-1.016.179-1.467-.096-2.312a21 21 0 0 1-.157-.498l-.03-.1c-.364-1.208-.605-2.005.087-3.13a.5.5 0 0 0-.852-.524c-.928 1.508-.587 2.637-.192 3.944l.03.1q.088.29.163.517c.247.761.322 1.016.02 1.936a2 2 0 0 0-1.01.504a.5.5 0 0 0 .682.731m6.365-2.985a2 2 0 0 0 .859-.191a.5.5 0 0 0-.426-.905a1.07 1.07 0 0 1-1.384-.457a.5.5 0 1 0-.881.472c.18.336.448.601.76.785c-.537 1.305-.232 2.691.017 3.426a.5.5 0 1 0 .947-.319c-.168-.498-.494-1.756-.002-2.826c.038.002.073.015.11.015m4.797 9.429a.497.497 0 0 0-.531-.467a1.825 1.825 0 0 1-1.947-1.703a.51.51 0 0 0-.533-.465a.5.5 0 0 0-.465.533c.041.59.266 1.122.608 1.555c-.804.946-1.857 1.215-2.444 1.284c-.519.062-.973.009-1.498-.053c-.481-.055-1.025-.118-1.698-.098l-.005.001c-.02-.286-.088-.703-.305-1.05a.501.501 0 0 0-.847.531c.134.215.159.558.159.725c-.504.181-.94.447-1.334.704c-.704.458-1.259.82-2.094.632c-.756-.173-1.513-.208-2.155-.118c-.1-.251-.258-.551-.502-.782a.5.5 0 0 0-.687.727c.086.081.154.199.209.317c-1.103.454-1.656 1.213-1.682 1.25a.499.499 0 0 0 .407.788a.5.5 0 0 0 .406-.205c.005-.008.554-.743 1.637-1.04c.56-.154 1.363-.141 2.146.037c.219.05.422.067.619.07c.093.218.129.477.134.573a.5.5 0 0 0 .497.563a.5.5 0 0 0 .495-.435a2.9 2.9 0 0 0-.059-.981a4.67 4.67 0 0 0 2.345-1.471a2.8 2.8 0 0 0 1.656.413a.5.5 0 0 0 .465-.531" />
+                        </g>
+                    </svg>
+                    <span>
+                        por
+                        <a href="https://dejeloper.com" class="font-medium text-blue-600 hover:text-blue-400"
+                            target="_blank">dejeloper</a></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
